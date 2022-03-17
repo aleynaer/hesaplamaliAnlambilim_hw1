@@ -201,8 +201,12 @@ df_verbs = pd.DataFrame(data=df_verbs, columns = verb_cols)
 #%% creating data singularity
 df_noun = df_noun.groupby(["kelime"]).first() 
 df_verbs = df_verbs.groupby(["kelime"]).first()
-#%% save the general data 
 
+#%% resetting index
+df_noun = df_noun.reset_index(level=0)
+df_verbs = df_verbs.reset_index(level=0)
+
+#%% save the general data 
 df_noun.to_csv("nouns.csv", index = False)
 df_verbs.to_csv("verbs.csv", index = False)
 
