@@ -1,27 +1,26 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 17 20:30:04 2022
-
-@author: Asus
-"""
-#%% read files
-with open("isimler_2022_mart.txt",encoding="utf8") as f:
-    nouns = f.readlines()
-
-with open("fiiller_2022_mart.txt") as f:
-    verbs = f.readlines()
-#%% import libs for turkish spell correction
 import turkishnlp
 from turkishnlp import detector
+import pandas as pd
+from difflib import SequenceMatcher
+
+with open("isimler", encoding='utf-8') as f:
+    nouns = f.readlines()
+
+with open("fiiller", encoding="utf-8") as f:
+    verbs = f.readlines()
+
+
 obj = detector.TurkishNLP()
 obj.download()
 obj.create_word_set()
+
 #%% spell correction func
 def autoCorrect(text):
     text = obj.list_words(text)
     corrected_text = obj.auto_correct(text)
     corrected_text = " ".join(corrected_text)
     return corrected_text
+
 #%% text cleaning func
 def cleanText(text):
     
@@ -42,42 +41,43 @@ def cleanText(text):
             
     #text = obj.auto_correct(text)
     return text
-#%% creating noun df
 
+#%% creating noun df
 for i in range(len(nouns)):
     sample = nouns[i]
     nouns[i] = cleanText(sample)
 
-import pandas as pd
-
 df_noun = pd.DataFrame(nouns, columns = ["kelime"])
 df_noun[['kelime', 'ilişki_türü','ilişki_değeri']] = df_noun["kelime"].str.split(',',3,expand=True)
 df_noun.sort_values(by = ["kelime"], ascending = True, inplace = True, ignore_index = True)
-print(df_noun["ilişki_türü"].unique())
-#%% creating verb df
+#print(df_noun["ilişki_türü"].unique())
 
+#%% creating verb df
 for i in range(len(verbs)):
     sample = verbs[i]
     verbs[i] = cleanText(sample)
 
 df_verbs = pd.DataFrame(verbs, columns = ["kelime"])
 df_verbs[['kelime', 'ilişki_türü','ilişki_değeri']] = df_verbs["kelime"].str.split(',',3,expand=True)
-print(df_noun.tail()) # her sütunda bozukluk var, spell checker uygula
+#print(df_noun.tail()) # her sütunda bozukluk var, spell checker uygula
 df_verbs.sort_values(by = ["kelime"], ascending = True, inplace = True, ignore_index = True)
-print(df_verbs["ilişki_türü"].unique())
-#%% auto correct the annotators data 
+#print(df_verbs["ilişki_türü"].unique())
 
+#%% auto correct the annotators data
 def correctAnnots(df):
     for word in range(len(df)):
         relation_value = df["ilişki_değeri"].values[word]
         corrected = autoCorrect(relation_value)
         df["ilişki_değeri"].values[word] = corrected
 #%%
+
 correctAnnots(df_noun)
 correctAnnots(df_verbs)
+
 #%% data singularity
 df_noun = pd.DataFrame(df_noun.groupby(["kelime","ilişki_türü"])["ilişki_değeri"].agg(list))
 df_verbs = pd.DataFrame(df_verbs.groupby(["kelime","ilişki_türü"])["ilişki_değeri"].agg(list))
+
 #%% turn index into columns after agg
 df_noun = df_noun.reset_index(level=1)
 df_noun = df_noun.reset_index(level=0)
@@ -127,13 +127,11 @@ verb_cols = ['kelime','tanımı nedir','nasıl yapılır','niçin yapılır',
         'kim ne yapar','fiziksel zihinsel']
 
 #%% concat cols and data
-
 data = pd.DataFrame(columns=all_cols)
-df_noun  = pd.concat([df_noun,data], axis = 1)
-df_verbs  = pd.concat([df_verbs,data], axis = 1)
+df_noun= pd.concat([df_noun,data], axis = 1)
+df_verbs= pd.concat([df_verbs,data], axis = 1)
 
 #%% correcting typos for relation types
-from difflib import SequenceMatcher
 
 def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
@@ -162,11 +160,11 @@ correctRelations(df_noun)
 #%%
 correctRelations(df_verbs)
 #%%
-print(df_noun["ilişki_türü"].unique())
-print(df_noun["ilişki_türü"].nunique())
+#print(df_noun["ilişki_türü"].unique())
+#print(df_noun["ilişki_türü"].nunique())
 #%%
-print(df_verbs["ilişki_türü"].unique())
-print(df_verbs["ilişki_türü"].nunique())
+#print(df_verbs["ilişki_türü"].unique())
+#print(df_verbs["ilişki_türü"].nunique())
 #%% ilişki türü '' empty olanları siler
 df_verbs.drop(df_verbs[df_verbs['ilişki_türü'] == ''].index, inplace = True)
 #%% relation type infos to relation columns
@@ -187,7 +185,7 @@ def createTable(df):
                     relation_value2 = df["ilişki_değeri"].values[j]
                     for v2 in relation_value:
                         values.add(v2)
-        print(word,relation_type, "",values)
+        #print(word, relation_type, "", values)
         df[relation_type].values[i] = list(values)
             
 
