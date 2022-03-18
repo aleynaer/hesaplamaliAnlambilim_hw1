@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Mar 18 15:31:15 2022
+Created on Fri Mar 18 22:14:22 2022
 
-@author: Asus
+@author: AleynaEr
 """
-
 import pandas as pd
 from ast import literal_eval
 
@@ -31,9 +30,10 @@ cols = list(table.iloc[:,1:].columns)
 penalty = 1
 similar_dict = {}
 initial = random_num
+copy = {}
 dict2 = {}
 #%%
-def searchSimilars(penalty, initial):
+def simpleSimilars(penalty, initial):
     if(penalty < 20):
         for col in cols:
             colnum = cols.index(col) # curr col
@@ -48,39 +48,8 @@ def searchSimilars(penalty, initial):
                     #penalty += 1
                 #penalty = temp_penalty 
     return similar_dict
-#%% 
 #%%
-"""
-def findSimilarss(penalty,initial):
-    if(penalty < 20):
-        for col in cols:
-            colnum = cols.index(col) # curr col
-            if(colnum % 2 == 1):
-                penalty += 1
-            sims = table[col].values[initial] # birinci dereceden yakınlar eklenir
-            temp_penalty = penalty
-            for element in sims:
-                if(element not in similar_dict.keys() and element != ''):
-                    #pair = {i:penalty}
-                    similar_dict.update({element:penalty})
-                    copy = similar_dict # yeni ekledim
-                    for keys in copy.keys(): #similar_dict olacak
-                        initial = table[table["kelime"]==keys].index.values # key tabloda kelime olarak var mı
-                        if(initial > 0): # varsa
-                            penalty = copy.get(keys)
-                            penalty += 8
-                            initial = initial[0]
-                            findSimilars(penalty,initial)
-                            #return copy
-                            print("girdi ve çağırdı") 
-            penalty = temp_penalty
-            initial = random_num
-    return similar_dict"""
-                
-#%%
-a = searchSimilars(penalty, initial)
-#%%
-#♠b = findSimilars(penalty,initial)
+#a = simpleSimilars(penalty, initial)      
 #%%
 def searchOthers(similar_dict,dict2):
     for key in similar_dict.keys():
@@ -98,47 +67,21 @@ def searchOthers(similar_dict,dict2):
                        if(penalty < 20):
                            sims = table[col].values[initial]
                            for element in sims:
-                               if(element not in dict2.keys() and element not in dict2.keys() and element != ''):
+                               if(element not in dict2.keys() and element not in similar_dict.keys() and element != ''):
                                    dict2.update({element:penalty})
-    return dict2
+    return dict2             
 #%%
-searchSimilars(penalty, initial)                  
+#b = searchOthers(similar_dict,dict2)                                              
 #%%
-searchOthers(similar_dict,dict2)
+"""aaa = a.copy()
+aaa.update(b)"""
 #%%
-"""
+
+#%%   
+simpleSimilars(penalty, initial)
+i = 0
+while(i < 2):
+    searchOthers(similar_dict,dict2)   
+    similar_dict.update(dict2)
+    i += 1
 #%%
-#elems = []
-def findSimilars(penalty,initial):
-    if(penalty < 20):
-        for col in cols:
-            colnum = cols.index(col) # curr col
-            if(colnum % 2 == 1):
-                penalty += 1
-            sims = table[col].values[initial] # birinci dereceden yakınlar eklenir
-            #temp_penalty = penalty
-            for element in sims:
-                if(element not in similar_dict.keys() and element != ''):
-                    #pair = {i:penalty}
-                    similar_dict.update({element:penalty})
-                    
-        #copy = similar_dict # yeni ekledim
-        for keys in similar_dict.keys(): #similar_dict olacak
-            initial = table[table["kelime"]==keys].index.values # key tabloda kelime olarak var mı
-            if(initial > 0): # varsa
-                penalty = similar_dict.get(keys)
-                penalty += 3
-                if(penalty < 20):
-                    initial = initial[0]
-                    print(initial)
-                    sims = table[col].values[initial]
-                    for element in sims:
-                        print(element)
-                        if(element not in dict2.keys() and element not in similar_dict.keys() and element != ''):
-                            dict2.update({element:penalty})
-                    
-                    #return copy
-    #◘dict2.update(similar_dict)                 
-    return dict2,similar_dict
-#%%
-b = findSimilars(penalty,initial)"""
