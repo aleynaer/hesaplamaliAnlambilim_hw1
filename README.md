@@ -14,4 +14,4 @@ Random kelime seçildiğinde, bu kelimeye yakın anlamlı kavramlar tabloda gezi
 Oyun başlatıldığında, yeni bir ranndom kelime seçilir ve buna uygun yakın anlamlılar sözlüğü oluşturulur.
 Kullanıcının 5 tahmin ve 3 ipucu isteme hakkı vardır.
 
-![oyundan kesit](hnc3.jpg)
+![oyundan kesit](hnc3.png)
