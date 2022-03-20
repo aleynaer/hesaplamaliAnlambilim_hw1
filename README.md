@@ -11,7 +11,7 @@ Oyun, temel anlamda bir sıcak-soğuk oyunudur. Oyunun amacı, bilgisayar taraf�
 Random kelime seçildiğinde, bu kelimeye yakın anlamlı kavramlar tabloda gezilerek hesaplanır ve dictionary oluşturulur. Uzaklık (ceza) kavramı ve yakın anlamlılar sözlüğünün oluşturulması hakkında detaylı bilgi için proje raporunu inceleyebilirsiniz.
 
 
-Oyun başlatıldığında, yeni bir ranndom kelime seçilir ve buna uygun yakın anlamlılar sözlüğü oluşturulur.
+Oyun başlatıldığında, yeni bir random kelime seçilir ve buna uygun yakın anlamlılar sözlüğü oluşturulur.
 Kullanıcının 5 tahmin ve 3 ipucu isteme hakkı vardır.
 
 ![oyundan kesit](hnc3.png)
