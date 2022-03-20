@@ -32,12 +32,13 @@ Created on Fri Mar 18 22:14:22 2022
 """
 
 
-#%% importing essential libs
+#%% importing essential libs and prepare table
 import pandas as pd
 from ast import literal_eval
 
 table = pd.read_csv("hotncold_data.csv")
 
+# prepare table, turn into values as list (pd.read_csv reads list as string)
 table.fillna("empty", inplace = True)
 cols = table.iloc[:,1:].columns
 
