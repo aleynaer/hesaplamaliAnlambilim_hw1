@@ -165,8 +165,10 @@ def startGame():
                 predict = startPredict(user_input)
                 if(predict == True):
                     game_counter = 8
+                    counter = 5
             else:
-                print("bilemediniz..")
+                print("bilemediniz ..  bir dahaki sefere :) \n")
+                print("doğru cevap: {} ".format(hidden_word))
                 game_counter = 8
             
 #%% take hints for hidden word
