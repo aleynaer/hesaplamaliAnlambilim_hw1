@@ -64,7 +64,7 @@ initial = random_num
 copy = {}
 dict2 = {}
 
-#%% creating base similarity dict
+#%% creating base similarity dict 
 def simpleSimilars(penalty, initial):
     if(penalty < 20):
         for col in cols:
@@ -80,11 +80,8 @@ def simpleSimilars(penalty, initial):
                     #penalty += 1
                 #penalty = temp_penalty 
     return similar_dict
-
-#%%
-#a = simpleSimilars(penalty, initial)      
-
-#%% find neighbours and update similarity dict
+      
+#%% find neighbours and update similarity dict 
 def searchOthers(similar_dict,dict2):
     for key in similar_dict.keys():
         initial = table[table["kelime"]==key].index.values # key tabloda kelime olarak var mı
@@ -105,7 +102,7 @@ def searchOthers(similar_dict,dict2):
                                    dict2.update({element:penalty})
     return dict2             
 
-#%%   starting 
+#%% initialize similarity dict 
 def createSimilarityDict():
     simpleSimilars(penalty, initial)
     i = 0
@@ -117,8 +114,7 @@ def createSimilarityDict():
 #%% initialize similarity dict for game
 createSimilarityDict()
 
-#%% compare predict results
-
+#%% compare prediction results 
 def startPredict(predict):
     if(predict == hidden_word):
         print("Tebrikler! Bildiniz!")
@@ -136,12 +132,12 @@ def startPredict(predict):
     else:
         print(" çok soğuk ")
 
-#%% starting game
-game_counter = 0
-counter = 0
-counter_h = 0
-    
+#%% game init    
 def startGame(game_counter,counter,counter_h):
+    game_counter = 0
+    counter = 0
+    counter_h = 0
+    
     print("***** KELİMEYİ BUL *****")
     print(".. ipucu almak için H'e basın ..")
 
@@ -160,6 +156,7 @@ def startGame(game_counter,counter,counter_h):
                 counter_h += 1
             else:
                 print(" ipucu hakkınız kalmadı :( ")
+                game_counter -= 1
     
         else:
             if(counter < 5):
@@ -169,6 +166,7 @@ def startGame(game_counter,counter,counter_h):
                     game_counter = 8
             else:
                 print("bilemediniz..")
+                game_counter = 8
             
 #%% take hints for hidden word
 def takeHint():
@@ -177,6 +175,7 @@ def takeHint():
     keys_list = list(similar_dict)
     hint = keys_list[ran_num]
     print("ipucu: ", hint)
-#%%
-startGame(game_counter,counter,counter_h)
+    
+#%% starting game
+startGame()
 #%%
