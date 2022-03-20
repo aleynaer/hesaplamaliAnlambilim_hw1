@@ -161,8 +161,8 @@ def startGame(game_counter,counter,counter_h):
         else:
             if(counter < 5):
                 counter += 1
-                startPredict(user_input)
-                if(startPredict == True):
+                predict = startPredict(user_input)
+                if(predict == True):
                     game_counter = 8
             else:
                 print("bilemediniz..")
