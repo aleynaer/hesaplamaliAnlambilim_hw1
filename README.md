@@ -9,3 +9,9 @@ Oyun, temel anlamda bir sıcak-soğuk oyunudur. Oyunun amacı, bilgisayar taraf�
 0-8: çok sıcak (çok yakın), 8-14: sıcak, 15-20: soğuk, girilen tahmin similarity sözlüğünde yoksa: çok soğuk
 
 Random kelime seçildiğinde, bu kelimeye yakın anlamlı kavramlar tabloda gezilerek hesaplanır ve dictionary oluşturulur. Uzaklık (ceza) kavramı ve yakın anlamlılar sözlüğünün oluşturulması hakkında detaylı bilgi için proje raporunu inceleyebilirsiniz.
+
+
+Oyun başlatıldığında, yeni bir ranndom kelime seçilir ve buna uygun yakın anlamlılar sözlüğü oluşturulur.
+Kullanıcının 5 tahmin ve 3 ipucu isteme hakkı vardır.
+
+![oyundan kesit](hnc3.jpg)
