@@ -134,7 +134,7 @@ def startPredict(predict):
         print(" çok soğuk ")
 
 #%% game init    
-def startGame(game_counter,counter,counter_h):
+def startGame():
     game_counter = 0
     counter = 0
     counter_h = 0
