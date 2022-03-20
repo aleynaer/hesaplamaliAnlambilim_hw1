@@ -6,4 +6,6 @@ Proje, YTÜ Bilgisayar Mühendisliği Doktora Programı kapsamında yürütülen
 
 Oyun, temel anlamda bir sıcak-soğuk oyunudur. Oyunun amacı, bilgisayar tarafından random seçilen kelimenin (isim veya fiil olabilir) kullanıcı tarafından tahmin edilmesidir. Kullanıcı girdi olarak kelime veya kelime grubu girebilmektedir. Kullanıcının girdiği değerin istenilene (random seçilen kelimeye) anlamsal olarak yakın olmasına göre sıcak-soğuk dönüşü yapılır. 
 
-0-8: çok sıcak, 8-14: sıcak, 15-20: soğuk, girilen tahmin similarity sözlüğünde yoksa: çok soğuk
+0-8: çok sıcak (çok yakın), 8-14: sıcak, 15-20: soğuk, girilen tahmin similarity sözlüğünde yoksa: çok soğuk
+
+Random kelime seçildiğinde, bu kelimeye yakın anlamlı kavramlar tabloda gezilerek hesaplanır ve dictionary oluşturulur. Uzaklık (ceza) kavramı ve yakın anlamlılar sözlüğünün oluşturulması hakkında detaylı bilgi için proje raporunu inceleyebilirsiniz.
