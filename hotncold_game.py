@@ -136,7 +136,7 @@ def startPredict(predict):
 #%% game init    
 def startGame():
     game_counter = 0
-    counter = 0
+    counter = 1
     counter_h = 0
     
     print("***** KELİMEYİ BUL *****")
